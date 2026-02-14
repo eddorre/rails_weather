@@ -39,7 +39,7 @@
           elsif index == 1
             "Tomorrow"
           else
-            day.date
+            Date.parse(day.date).strftime("%a")
           end
         %>
 
