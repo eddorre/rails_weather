@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "forecasts#new"
+
+  resources :forecasts, only: %i[new create show], param: :postcode
 end
