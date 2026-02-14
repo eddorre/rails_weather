@@ -8,3 +8,191 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  color: #111;
+  margin: 0;
+}
+
+/* Page Container */
+
+.forecast {
+  max-width: 1100px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+
+/* Headers */
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+/* Header Row */
+
+.forecast-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Cached Badge */
+
+.forecast-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.forecast-badge-cached {
+  border: 1px solid #999;
+}
+
+.forecast-badge-fresh {
+  border: 1px solid #2563eb;
+}
+
+/* Form Styles */
+
+.forecast-form-container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.forecast-input {
+  width: 500px;
+  max-width: 90%;
+  padding: 16px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+.forecast-button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+.forecast-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Current Conditions */
+
+.forecast-current {
+  margin-bottom: 48px;
+}
+
+.forecast-current-grid {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.forecast-current-icon img {
+  width: 150px;
+  height: 150px;
+  display: block;
+}
+
+.forecast-current-temp {
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.forecast-current-label {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.forecast-current-range {
+  font-size: 15px;
+  color: #444;
+}
+
+.forecast-current {
+  margin-bottom: 32px;
+}
+
+/* Extended Forecast Grid */
+
+.forecast-days-grid {
+  margin-top: 16px;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+/* Responsive Breakpoints */
+
+@media (max-width: 1100px) {
+  .forecast-days-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 750px) {
+  .forecast-days-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 450px) {
+  .forecast-days-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Individual Day Column */
+
+.forecast-day {
+  text-align: center;
+}
+
+.forecast-day-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.forecast-day-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0;
+}
+
+.forecast-day-icon img {
+  width: 64px;
+  height: 64px;
+  display: block;
+}
+
+.forecast-day-condition {
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.forecast-day-temps {
+  font-size: 14px;
+  line-height: 1.3;
+}
