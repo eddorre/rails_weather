@@ -1,3 +1,13 @@
+# Integration client for the Nominatim (OpenStreetMap) geocoding API.
+#
+# Responsible for translating a user-supplied address or location string
+# into geographic coordinates (latitude and longitude) and a postcode.
+#
+# Only the minimal subset of response data required by the application
+# is extracted and normalized. Full schema validation is intentionally
+# avoided due to the small surface area of data being consumed.
+#
+# Raises ApiError if the request fails or the response cannot be parsed.
 module Integrations
   module Geocoders
     class Nominatim
@@ -16,6 +26,7 @@ module Integrations
         @address = address
       end
 
+      # limit: 1 ensures we only consider the most relevant match.
       def call
         response = HTTP
           .timeout(connect: 3, read: 5)
@@ -31,6 +42,11 @@ module Integrations
 
       private
 
+      # Extracts the first result from the Nominatim response and
+      # validates that required fields (postcode, lat, lon) are present.
+      #
+      # Nominatim returns an array of results; we assume the first
+      # entry is the most relevant match.
       def parse_response(response)
         json = JSON.parse(response.body.to_s)&.first
 
@@ -40,6 +56,7 @@ module Integrations
         latitude = json.dig("lat")
         longitude = json.dig("lon")
 
+        # Ensure all required fields are present before returning normalized data.
         attributes = [postcode, latitude, longitude].reject(&:blank?)
 
         raise ResponseError,

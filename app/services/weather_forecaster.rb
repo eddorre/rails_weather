@@ -1,3 +1,9 @@
+# Coordinates geocoding, weather retrieval, and caching.
+# Responsible for orchestrating external integrations while
+# keeping controllers thin.
+#
+# Uses dependency injection to allow alternate geocoders,
+# weather services, or cache implementations.
 class WeatherForecaster
   class GeocodingError < StandardError; end
   class WeatherServiceError < StandardError; end

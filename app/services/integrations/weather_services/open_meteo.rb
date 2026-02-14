@@ -1,3 +1,9 @@
+# Integration client for the Open-Meteo API.
+#
+# Validates and normalizes the external JSON response into a
+# simplified hash suitable for constructing ForecastResult.
+#
+# Raises ApiError or ResponseError on failure.
 module Integrations
   module WeatherServices
     class OpenMeteo
@@ -54,6 +60,17 @@ module Integrations
         raise ResponseError, "Failed to parse Open-Meteo API response"
       end
 
+
+      # Validates the minimal contract we rely on from Open-Meteo.
+      #
+      # Open-Meteo returns "daily" data as parallel arrays (time[], min[], max[], code[]).
+      # The application assumes these arrays align by index, so we enforce:
+      # - required keys are present
+      # - daily arrays exist and have the same length
+      #
+      # We intentionally validate only the fields we consume rather than the entire payload.
+      #
+      # Raises ResponseError if the contract is violated.
       def validate_json!(json)
         raise ResponseError, "Missing current section" unless json.dig("current")
         raise ResponseError, "Missing daily section" unless json.dig("daily")
@@ -71,6 +88,7 @@ module Integrations
           daily.dig("weather_code").size
         ].uniq
 
+        # These arrays must be the same length, otherwise indexing by day would mix data.
         raise ResponseError, "Daily arrays have mismatched lengths" unless lengths.size == 1
       end
 
