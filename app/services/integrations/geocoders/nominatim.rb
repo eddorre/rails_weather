@@ -46,9 +46,9 @@ module Integrations
           "Nominatim API response missing required fields" if attributes.size < 3
 
         {
-          latitude: json.dig("lat"),
-          longitude: json.dig("lon"),
-          postcode: json.dig("address", "postcode"),
+          postcode: postcode,
+          latitude: latitude,
+          longitude: longitude
         }
       rescue JSON::ParserError => e
         raise ResponseError, "Failed to parse Nominatim API response"
