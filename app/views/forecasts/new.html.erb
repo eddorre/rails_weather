@@ -1,0 +1,16 @@
+<div class="forecast-form-container">
+  <h1>Get the forecast for your location</h1>
+
+  <%= form_with url: forecasts_path, method: :post, local: true, data: { turbo: false } do |form| %>
+    <div>
+      <%= form.text_field :address,
+        placeholder: "Enter your address...",
+        required: true,
+        autofocus: true,
+        class: "forecast-input"
+      %>
+    </div>
+
+    <div><%= form.submit "Get Forecast", class: "forecast-button" %></div>
+  <% end %>
+</div>
