@@ -24,7 +24,7 @@ describe Integrations::Geocoders::Nominatim do
           .and_return(double(status: double(success?: true), body: response.to_json))
       end
 
-      it "returns the correct latitude, longitude, and postcode" do
+      it "returns normalized geocoded data" do
         expect(subject).to eq(result)
       end
 
