@@ -1,0 +1,62 @@
+<div class="forecast">
+  <header class="forecast-header">
+    <h1>Current Conditions for <%= @address %></h1>
+
+    <% if @cached %>
+      <p class="forecast-badge forecast-badge-cached">Cached result</p>
+    <% else %>
+      <p class="forecast-badge forecast-badge-fresh">Fresh result</p>
+    <% end %>
+  </header>
+
+  <section class="forecast-current">
+    <div class="forecast-current-grid">
+      <div class="forecast-current-icon">
+        <%= image_tag "weather/#{weather_icon_key(@forecast.current_code)}.svg",
+          alt: weather_label(@forecast.current_code) %>
+      </div>
+
+      <div class="forecast-current-info">
+        <div class="forecast-current-temp">
+          <%= @forecast.current_temperature %><%= @forecast.temperature_unit %>
+        </div>
+
+        <div class="forecast-current-label">
+          <%= weather_label(@forecast.current_code) %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="forecast-extended">
+    <h2>Extended Forecast</h2>
+
+    <div class="forecast-days-grid">
+      <% @forecast.days.each_with_index do |day, index| %>
+        <% label =
+          if index == 0
+            "Today"
+          elsif index == 1
+            "Tomorrow"
+          else
+            day.date
+          end
+        %>
+
+        <div class="forecast-day">
+          <div class="forecast-day-label"><%= label %></div>
+          <div class="forecast-day-icon" aria-hidden="true">
+            <%= image_tag "weather/#{weather_icon_key(day.code)}.svg", alt: weather_label(day.code) %>
+          </div>
+          <div class="forecast-day-condition"><%= weather_label(day.code) %></div>
+          <div class="forecast-day-temps">
+            High <%= day.max %><%= @forecast.temperature_unit %><br>
+            Low <%= day.min %><%= @forecast.temperature_unit %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <p class="forecast-back-link"><%= link_to "Check another address", new_forecast_path %></p>
+</div>
