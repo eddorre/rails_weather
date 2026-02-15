@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   root "forecasts#new"
 
   resources :forecasts, only: %i[new create show], param: :postcode
+  get "/forecasts", to: redirect("/forecasts/new")
 end
