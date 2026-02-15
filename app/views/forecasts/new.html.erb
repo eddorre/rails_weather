@@ -1,3 +1,7 @@
+<% if flash[:alert].present? %>
+  <div class="forecast-alert"><%= flash[:alert] %></div>
+<% end %>
+
 <div class="forecast-form-container">
   <h1>Get the forecast for your location</h1>
 

@@ -16,6 +16,16 @@ body {
   margin: 0;
 }
 
+/* Alert */
+.forecast-alert {
+  max-width: 520px;
+  margin: 16px auto 0;
+  padding: 10px 12px;
+  border: 1px solid #b91c1c;
+  color: #b91c1c;
+  border-radius: 8px;
+}
+
 /* Page Container */
 
 .forecast {
